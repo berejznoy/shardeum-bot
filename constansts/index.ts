@@ -1,6 +1,6 @@
 export enum Statuses {
-    Offline,
-    Active,
-    StandBy,
-    Null
+    offline,
+    active,
+    standby,
+    null
 }
