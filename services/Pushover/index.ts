@@ -9,7 +9,7 @@ export class ShardeumPushover {
 
     private async sendNotification(message: string) {
         this.pushover
-            .setSound('cashregister')
+            .setSound('pushover')
         try {
             await this.pushover.send('Shardeum', message)
         } catch (error) {
