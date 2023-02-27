@@ -24,7 +24,7 @@ export class ShardeumPushover {
             }
         } catch (e) {
             //@ts-ignore
-            if (this.prevStatus !== 'offline' && e.response!.status === 400) {
+            if (this.prevStatus !== 'offline' && e.response?.status !== 400) {
                 await this.sendNotification('Node is not working')
                 this.prevStatus = 'offline'
             }
