@@ -8,7 +8,7 @@ config();
 //Отключаем проверку сертификата
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
-const index = express()
+const app = express()
 
 const port = process.env.PORT;
 
@@ -21,6 +21,6 @@ Auth.getAuth().then(() => {
 
 
 
-index.listen(port, () => {
+app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

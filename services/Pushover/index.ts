@@ -23,8 +23,8 @@ export class ShardeumPushover {
                 this.prevStatus = state
             }
         } catch (e) {
-            if (this.prevStatus !== 'offline') {
-                console.log('Node is not working')
+            //@ts-ignore
+            if (this.prevStatus !== 'offline' && e.response!.status === 400) {
                 await this.sendNotification('Node is not working')
                 this.prevStatus = 'offline'
             }
@@ -32,6 +32,6 @@ export class ShardeumPushover {
     }
 
     startPushover() {
-        setInterval(this.status, 1000 * 60)
+        setInterval(this.status, 5000 * 60)
     }
 }
