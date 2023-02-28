@@ -1,4 +1,5 @@
 import {Auth} from "./service";
+import AxiosWithAuth from "./AxiosWithAuth";
 
 
 type ResponseNodeInfo = {
@@ -35,7 +36,11 @@ type ResponseNodeInfo = {
 
 }
 
+
+const axiosWithAuth = new AxiosWithAuth();
+
+
 export const getNodeInfo = async(): Promise<ResponseNodeInfo["data"]> => {
-    const response = await Auth.http.get('/api/node/status')
+    const response = await axiosWithAuth.get('/api/node/status')
     return response?.data
 }

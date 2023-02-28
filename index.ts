@@ -1,7 +1,6 @@
 import express from 'express';
 import {config} from 'dotenv'
 import {ShardeumPushover} from "./services/Pushover";
-import {Auth} from "./api/service";
 
 config();
 
@@ -12,12 +11,10 @@ const app = express()
 
 const port = process.env.PORT;
 
-Auth.getAuth().then(() => {
-    Auth.request().then(() => {
-        const Pushover = new ShardeumPushover()
-        Pushover.startPushover()
-    })
-}).catch(() => 'Error')
+
+const Pushover = new ShardeumPushover()
+Pushover.startPushover()
+
 
 
 
