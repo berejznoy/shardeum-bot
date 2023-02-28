@@ -1,4 +1,3 @@
-import {Auth} from "./service";
 import AxiosWithAuth from "./AxiosWithAuth";
 
 
