@@ -1,5 +1,6 @@
 import {Pushover} from "pushover-js";
 import {getNodeInfo, startNode} from "../../api";
+import {MODE} from "../../constansts";
 
 export default class PushService {
     private prevStatus: 'offline' | 'active' | 'standby' | 'stopped'
@@ -38,7 +39,15 @@ export default class PushService {
         }
     }
 
+    private restartOnly = async () => {
+        const {state} = await getNodeInfo()
+        if(state === 'stopped') {
+            await startNode()
+        }
+    }
+
     start() {
-        setInterval(this.healthCheck, 5000 * 60)
+        const mode: keyof typeof MODE = process.env.MODE as keyof typeof MODE || 'RESTART_ONLY'
+        setInterval(mode === 'RESTART_ONLY' ? this.restartOnly : this.healthCheck, 5000 * 60)
     }
 }
