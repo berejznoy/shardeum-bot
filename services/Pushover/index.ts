@@ -19,14 +19,11 @@ export class ShardeumPushover {
         try {
             const {state} = await getNodeInfo()
             if (state !== this.prevStatus) {
-
-                if(state === 'stopped') {
-                    await this.sendNotification(`Node is ${state}. Trying to restart ...`)
-                    await startNode()
-                } else {
-                    await this.sendNotification(`Node is ${state}`)
-                }
+                await this.sendNotification(`Node is ${state}. ${state === 'stopped' ? 'Trying to restart' : ''}`)
                 this.prevStatus = state
+            }
+            if(state === 'stopped') {
+                await startNode()
             }
         } catch (e) {
             //@ts-ignore
