@@ -1,5 +1,5 @@
 import {Pushover} from "pushover-js";
-import {getNodeInfo} from "../../api";
+import {getNodeInfo, startNode} from "../../api";
 
 export class ShardeumPushover {
     private prevStatus: 'offline' | 'active' | 'standby' | 'stopped'  = 'offline'
@@ -19,7 +19,13 @@ export class ShardeumPushover {
         try {
             const {state} = await getNodeInfo()
             if (state !== this.prevStatus) {
-                await this.sendNotification(`Node is ${state}`)
+
+                if(state === 'stopped') {
+                    await this.sendNotification(`Node is ${state}. Trying to restart ...`)
+                    await startNode()
+                } else {
+                    await this.sendNotification(`Node is ${state}`)
+                }
                 this.prevStatus = state
             }
         } catch (e) {

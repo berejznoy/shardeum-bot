@@ -43,3 +43,7 @@ export const getNodeInfo = async(): Promise<ResponseNodeInfo["data"]> => {
     const response = await axiosWithAuth.get('/api/node/status')
     return response?.data
 }
+
+export const startNode = async(): Promise<void> => {
+    await axiosWithAuth.post('/api/node/start')
+}
