@@ -1,9 +1,14 @@
 import {Pushover} from "pushover-js";
 import {getNodeInfo, startNode} from "../../api";
 
-export class ShardeumPushover {
-    private prevStatus: 'offline' | 'active' | 'standby' | 'stopped'  = 'offline'
-    private pushover = new Pushover(process.env.PUSHOVER_USER_ID || "", process.env.PUSHOVER_APP_TOKEN || "");
+export default class PushService {
+    private prevStatus: 'offline' | 'active' | 'standby' | 'stopped'
+    private pushover: Pushover
+
+    constructor(pushover: Pushover) {
+        this.prevStatus = 'offline'
+        this.pushover = pushover
+    }
 
     private async sendNotification(message: string) {
         this.pushover
@@ -15,26 +20,25 @@ export class ShardeumPushover {
         }
     }
 
-    private status = async () => {
+    private healthCheck = async (): Promise<void> => {
         try {
             const {state} = await getNodeInfo()
             if (state !== this.prevStatus) {
-                await this.sendNotification(`Node is ${state}. ${state === 'stopped' ? 'Trying to restart' : ''}`)
+                await this.sendNotification(`Status: ${state}${state === 'stopped' ? '. Trying to restart' : ''}`)
                 this.prevStatus = state
             }
             if(state === 'stopped') {
                 await startNode()
             }
-        } catch (e) {
-            //@ts-ignore
-            if (this.prevStatus !== 'offline' && e.response?.status !== 400) {
-                await this.sendNotification('Node is not working')
+        } catch (error) {
+            if (this.prevStatus !== 'offline' && error.response?.status !== 400) {
+                await this.sendNotification('Status: not working')
                 this.prevStatus = 'offline'
             }
         }
     }
 
-    startPushover() {
-        setInterval(this.status, 5000 * 60)
+    start() {
+        setInterval(this.healthCheck, 5000 * 60)
     }
 }
