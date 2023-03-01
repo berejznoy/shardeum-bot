@@ -1,4 +1,4 @@
-# shardium-push
+# shardium-bot
 
 1. Установить git sudo apt install git
 2. Проверить что git установлен git --version
