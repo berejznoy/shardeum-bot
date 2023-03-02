@@ -32,22 +32,22 @@ export const startBot = () => {
         ctx.replyWithHTML(
             'Приветсвую в <b>Shardeum Status</b>\n\n'+
             '/status - Получение информации о ноде \n'+
-            '/startNode - Запустить ноду \n'+
-            '/stopNode - Остановить ноду \n'+
+            //'/startNode - Запустить ноду \n'+
+            //'/stopNode - Остановить ноду \n'+
             // '/autoRestart - Включить автоматический перезапуск ноды \n' +
             '/notify - Включить уведомления о статусе ноды \n' +
-            '/stopNotify - Включить уведомления о статусе ноды \n' +
+            //'/stopNotify - Включить уведомления о статусе ноды \n' +
             '/info - повтор доступных команд')
     })
     bot.command('info', ctx => {
         ctx.replyWithHTML(
             'Приветсвую в <b>Shardeum Status</b>\n\n'+
             '/status - Получение информации о ноде \n'+
-            '/startNode - Запустить ноду \n'+
-            '/stopNode - Остановить ноду \n'+
+            //'/startNode - Запустить ноду \n'+
+            //'/stopNode - Остановить ноду \n'+
             // '/autoRestart - Включить автоматический перезапуск ноды \n' +
-            '/notify - Включить уведомления о статусе ноды и перезапустить ноду если она остановлена \n' +
-            '/stopNotify - Включить уведомления о статусе ноды')
+            //'/stopNotify - Включить уведомления о статусе ноды \n' +
+            '/notify - Включить уведомления о статусе ноды и перезапустить ноду если она остановлена')
     })
     bot.command('status', async ctx => {
         try{
@@ -65,34 +65,34 @@ export const startBot = () => {
         }
 
     })
-    bot.command('startNode', async ctx => {
-        try {
-            ctx.reply('Отправляю запрос, подождите...')
-            const {state} = await getNodeInfo()
-            if(state !== 'stopped') {
-                ctx.reply('Нода уже запущена')
-            } else {
-                await startNode()
-                ctx.reply('Нода запущена, проверьте статус отправив /status')
-            }
-        } catch (e) {
-            ctx.reply('Что-то пошло не так')
-        }
-    })
-    bot.command('stopNode', async ctx => {
-        try {
-            ctx.reply('Отправляю запрос, подождите...')
-            const {state} = await getNodeInfo()
-            if(state === 'stopped') {
-                ctx.reply('Нода уже остановлена')
-            } else {
-                await stopNode()
-                ctx.reply('Нода остановлена')
-            }
-        } catch (e) {
-            ctx.reply('Что-то пошло не так')
-        }
-    })
+    // bot.command('startNode', async ctx => {
+    //     try {
+    //         ctx.reply('Отправляю запрос, подождите...')
+    //         const {state} = await getNodeInfo()
+    //         if(state !== 'stopped') {
+    //             ctx.reply('Нода уже запущена')
+    //         } else {
+    //             await startNode()
+    //             ctx.reply('Нода запущена, проверьте статус отправив /status')
+    //         }
+    //     } catch (e) {
+    //         ctx.reply('Что-то пошло не так')
+    //     }
+    // })
+    // bot.command('stopNode', async ctx => {
+    //     try {
+    //         ctx.reply('Отправляю запрос, подождите...')
+    //         const {state} = await getNodeInfo()
+    //         if(state === 'stopped') {
+    //             ctx.reply('Нода уже остановлена')
+    //         } else {
+    //             await stopNode()
+    //             ctx.reply('Нода остановлена')
+    //         }
+    //     } catch (e) {
+    //         ctx.reply('Что-то пошло не так')
+    //     }
+    // })
 
     // bot.command('autoRestart',  ctx => {
     //     try {
@@ -116,12 +116,12 @@ export const startBot = () => {
         }
     )
 
-    bot.command('stopNotify',  async ctx => {
-            clearInterval(interval)
-            ctx.reply('Уведомления и перезапуск выключены')
-            interval = null
-        }
-    )
+    // bot.command('stopNotify',  async ctx => {
+    //         clearInterval(interval)
+    //         ctx.reply('Уведомления и перезапуск выключены')
+    //         interval = null
+    //     }
+    // )
 
     bot.launch();
 
