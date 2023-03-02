@@ -25,7 +25,7 @@ main() {
   check_status
 }
 main
-EOF`
+EOF
 ```
 4. `sudo chmod +x restart.sh`
 5. `./restart.sh &`
