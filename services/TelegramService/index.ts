@@ -23,9 +23,7 @@ const notify = async (ctx: any) => {
         if (prevStatus !== 'offline' && error.response?.status !== 400) {
             ctx.reply('Статус: нода не работает')
             prevStatus = 'offline'
-        } else {
-            ctx.reply('Что-то пошло не так')
-        }}
+        }
 }
 export const startBot = () => {
     bot.start(ctx => {
