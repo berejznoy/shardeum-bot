@@ -110,9 +110,9 @@ export const startBot = () => {
                 ctx.reply('Уведомления и перезапуск уже включены')
                 return
             }
-            ctx.reply('Отправляю запрос, подождите...')
+            await ctx.reply('Отправляю запрос, подождите...')
             interval = setInterval(() => notifyNode(ctx), Number(process.env.INTERVAL) || 5000 * 60)
-            ctx.reply('Уведомления и перезапуск включены')
+            await ctx.reply('Уведомления и перезапуск включены')
         }
     )
 
