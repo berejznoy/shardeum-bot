@@ -47,3 +47,6 @@ export const getNodeInfo = async(): Promise<ResponseNodeInfo["data"]> => {
 export const startNode = async(): Promise<void> => {
     await axiosWithAuth.post('/api/node/start')
 }
+export const stopNode = async(): Promise<void> => {
+    await axiosWithAuth.post('/api/node/stop')
+}
