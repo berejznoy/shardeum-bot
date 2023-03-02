@@ -9,7 +9,7 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN || 'YOUR TG BOT ID')
 let prevStatus: 'offline' | 'active' | 'standby' | 'stopped' = 'offline'
 let interval: any = null
 
-const notifyNode = async (ctx: any) => {
+const notify = async (ctx: any) => {
     try {
         const {state} = await getNodeInfo()
         if (state !== prevStatus) {
@@ -32,21 +32,13 @@ export const startBot = () => {
         ctx.replyWithHTML(
             'Приветсвую в <b>Shardeum Status</b>\n\n'+
             '/status - Получение информации о ноде \n'+
-            //'/startNode - Запустить ноду \n'+
-            //'/stopNode - Остановить ноду \n'+
-            // '/autoRestart - Включить автоматический перезапуск ноды \n' +
             '/notify - Включить уведомления о статусе ноды \n' +
-            //'/stopNotify - Включить уведомления о статусе ноды \n' +
             '/info - повтор доступных команд')
     })
     bot.command('info', ctx => {
         ctx.replyWithHTML(
-            'Приветсвую в <b>Shardeum Status</b>\n\n'+
+            'Доступные команды \n'+
             '/status - Получение информации о ноде \n'+
-            //'/startNode - Запустить ноду \n'+
-            //'/stopNode - Остановить ноду \n'+
-            // '/autoRestart - Включить автоматический перезапуск ноды \n' +
-            //'/stopNotify - Включить уведомления о статусе ноды \n' +
             '/notify - Включить уведомления о статусе ноды и перезапустить ноду если она остановлена')
     })
     bot.command('status', async ctx => {
@@ -65,62 +57,16 @@ export const startBot = () => {
         }
 
     })
-    // bot.command('startNode', async ctx => {
-    //     try {
-    //         ctx.reply('Отправляю запрос, подождите...')
-    //         const {state} = await getNodeInfo()
-    //         if(state !== 'stopped') {
-    //             ctx.reply('Нода уже запущена')
-    //         } else {
-    //             await startNode()
-    //             ctx.reply('Нода запущена, проверьте статус отправив /status')
-    //         }
-    //     } catch (e) {
-    //         ctx.reply('Что-то пошло не так')
-    //     }
-    // })
-    // bot.command('stopNode', async ctx => {
-    //     try {
-    //         ctx.reply('Отправляю запрос, подождите...')
-    //         const {state} = await getNodeInfo()
-    //         if(state === 'stopped') {
-    //             ctx.reply('Нода уже остановлена')
-    //         } else {
-    //             await stopNode()
-    //             ctx.reply('Нода остановлена')
-    //         }
-    //     } catch (e) {
-    //         ctx.reply('Что-то пошло не так')
-    //     }
-    // })
-
-    // bot.command('autoRestart',  ctx => {
-    //     try {
-    //         ctx.reply('Отправляю запрос, подождите...')
-    //         const restartService = new RestartService()
-    //         restartService.start()
-    //         ctx.reply('Автозапуск ноды включен')
-    //     } catch (e) {
-    //         ctx.reply('Что-то пошло не так')
-    //     }
-    // })
 
     bot.command('notify',  async ctx => {
             if(interval) {
                 ctx.reply('Уведомления и перезапуск уже включены')
                 return
             }
-            interval = setInterval(() => notifyNode(ctx), Number(process.env.INTERVAL) || 5000 * 60)
+            interval = setInterval(() => notify(ctx), Number(process.env.INTERVAL) || 5000 * 60)
             await ctx.reply('Уведомления и перезапуск включены')
         }
     )
-
-    // bot.command('stopNotify',  async ctx => {
-    //         clearInterval(interval)
-    //         ctx.reply('Уведомления и перезапуск выключены')
-    //         interval = null
-    //     }
-    // )
 
     bot.launch();
 
