@@ -1,4 +1,4 @@
-# 1. Установка бота ТГ
+### 1. Установка бота ТГ
 
 1. Установить git - `sudo apt install git`
 2. Проверить что git установлен - `git --version`
@@ -22,5 +22,15 @@ TELEGRAM_BOT_TOKEN=YOUR_TG_BOT_TOKEN
 EOF
 ```
 9. Установить pm2 - `npm install pm2 -g`
-10. Запустить бота - `pm2 start npm --name "pushover" -- start`
+10. Запустить бота - `pm2 start npm --name "shardeum-bot" -- start`
 
+### 2. Остановить бота 
+   `pm2 stop shardeum-bot`
+
+### 3. Запустить бота 
+   `pm2 start shardeum-bot`
+   
+### 4. Проверить что бот работает
+   `pm2 list` \
+\
+   В ответе статус у shardeum-bot будет active - работет и stopped - не работает
