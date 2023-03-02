@@ -24,6 +24,7 @@ const notify = async (ctx: any) => {
             ctx.reply('Статус: нода не работает')
             prevStatus = 'offline'
         }
+    }
 }
 export const startBot = () => {
     bot.start(ctx => {
