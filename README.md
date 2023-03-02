@@ -10,7 +10,7 @@
 8. Заменить переменные\
    `YOUR_IP` - адрес сервера с нодой\
    `YOUR_PASSWORD` - пароль от Дашборда\
-   `YOUR_TG_BOT_TOKEN` - токен вышего бота (полученный от https://t.me/BotFather)\
+   `YOUR_TG_BOT_TOKEN` - токен вышего бота (полученный от https://t.me/BotFather) \
    в коде ниже и выполнить команду
 ```
 sudo tee .env > /dev/null <<EOF
