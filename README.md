@@ -1,7 +1,8 @@
 # Скрипт для перезапуска остановленной ноды без установки бота 
 1. `cd shardeum`
 2. `./shell.sh`
-3. ввести в консоль `sudo tee restart.sh > /dev/null <<EOF
+3. ввести в консоль 
+`sudo tee restart.sh > /dev/null <<EOF
 #!/bin/sh
 
 check_status() {
@@ -23,6 +24,7 @@ main() {
 }
 main
 EOF`
+
 4. `sudo chmod +x restart.sh`
 5. `./restart.sh &`
 
