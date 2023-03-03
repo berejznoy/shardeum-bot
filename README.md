@@ -34,3 +34,8 @@ EOF
    `pm2 list` \
 \
    В ответе статус у shardeum-bot будет active - работет и stopped - не работает
+   
+## Обновление бота
+1. Перейти в папку где находится бот `cd /home/ВАШ_ПОЛЬЗОВАТЕЛЬ/shardeum-bot/status-pushover`
+2. Выполнить команду `pm2 delete shardeum-bot` затем `git pull` затем `npm i`
+3. Выполнить команду `pm2 start npm --name "shardeum-bot" -- start`
