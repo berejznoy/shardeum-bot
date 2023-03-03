@@ -1,7 +1,7 @@
 import AxiosWithAuth from "./AxiosWithAuth";
 
 
-type ResponseNodeInfo = {
+export type ResponseNodeInfo = {
     data: {
         state: 'active' | 'stopped' | 'standby' ,
         totalTimeRunning: number,
