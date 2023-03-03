@@ -53,10 +53,10 @@ export const startBot = () => {
                 const {state, totalTimeValidating, lastActive, lockedStake, currentRewards} = scheduler.cacheData
                 const lastNodeActive = String(lastActive).replace(/0*$/,"")
                 await ctx.replyWithHTML(`Status: ${state}\n`+
-                    `Total time validating - ${totalTimeValidating ? millisecondsToHours(totalTimeValidating) : ''}h \n`+
+                    `Total time validating: ${totalTimeValidating ? millisecondsToHours(totalTimeValidating) : ''}h \n`+
                     `Time since last active: - ${lastActive ? format(fromUnixTime(Number(lastNodeActive)), 'dd.MM.yyyy: HH:mm') : ''} \n` +
-                    `SHM staked: - ${lockedStake} SHM \n` +
-                    `Earnings: - ${currentRewards} SHM \n \n` +
+                    `SHM staked: ${lockedStake} SHM \n` +
+                    `Earnings: ${currentRewards} SHM \n \n` +
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeum_rus'
                 )
             } else {
