@@ -37,8 +37,11 @@ EOF
    
 ## Обновление бота
 1. Перейти в папку где находится бот `cd /home/ВАШ_ПОЛЬЗОВАТЕЛЬ/shardeum-bot/status-pushover`
-2. Выполнить команду `pm2 delete shardeum-bot` затем `git pull` затем `npm i`
-3. Выполнить команду `pm2 start npm --name "shardeum-bot" -- start`
+2. Выполнить команду `pm2 delete shardeum-bot` - удаляем бота
+3. Выполнить команду `git pull` - стягиваем обновления
+4. Выполнить команду `npm i` - запускаем проект
+5. Выполнить команду `pm2 start npm --name "shardeum-bot" -- start` - запускаем бота
+6. Проверить что бот работает `pm2 list` - должен быть статус `online`
 
 ## Если бот не отвечает можно посмотреть логи `pm2 log` 
 
