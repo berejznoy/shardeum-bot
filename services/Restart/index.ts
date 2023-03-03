@@ -1,6 +1,6 @@
 import {getNodeInfo, startNode} from "../../api";
 
-export default class RestartService{
+export default class Restart{
     private restartNode = async () => {
         const {state} = await getNodeInfo()
         if(state === 'stopped') {

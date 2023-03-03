@@ -16,7 +16,7 @@ export default class PushService {
         try {
             await this.pushover.send('Shardeum', message)
         } catch (error) {
-            console.error(error)
+            console.error(error.message)
         }
     }
 
