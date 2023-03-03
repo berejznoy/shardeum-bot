@@ -4,7 +4,7 @@
 2. Проверить что git установлен - `git --version`
 3. Установить nodejs (https://github.com/nodesource/distributions/blob/master/README.md)
 4. Проверить что нода установилась node - `node --version`
-5. Создать и перейти в папку где будет лежать бот `mkdir shardeum-bot` затем `cd /shardeum-bot`
+5. Создать и перейти в папку где будет лежать бот `mkdir shardeum-bot` затем `cd shardeum-bot`
 6. Склонировать проект `git clone https://github.com/berejznoy/status-pushover.git` (Зарегистрироваться на https://github.com/, если нет аккаунта) 
 7. Перейти в папку с проектом `cd /status-pushover` и установить пакеты `npm i`
 8. Заменить переменные\
