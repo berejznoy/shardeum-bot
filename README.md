@@ -39,3 +39,7 @@ EOF
 1. Перейти в папку где находится бот `cd /home/ВАШ_ПОЛЬЗОВАТЕЛЬ/shardeum-bot/status-pushover`
 2. Выполнить команду `pm2 delete shardeum-bot` затем `git pull` затем `npm i`
 3. Выполнить команду `pm2 start npm --name "shardeum-bot" -- start`
+
+## Если бот не отвечает можно посмотреть логи `pm2 log` 
+
+Ошибка: Failed to get token: AxiosError: Request failed with status code 403 - Неправильно ввели пароль в .env
