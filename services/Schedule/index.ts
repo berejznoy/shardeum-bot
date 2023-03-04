@@ -32,8 +32,8 @@ class Scheduler {
             }
             this.cache.set('cachedData', responseData);
         } catch (error) {
-            if (error instanceof AxiosError && error.code === 'ETIMEDOUT') {
-                console.log('Request timed out, ignoring error.');
+            if ((error instanceof AxiosError && error.code === 'ETIMEDOUT') || error?.response?.status === 400) {
+                console.log('Request timed out or HTTP 400 error, ignoring');
             } else {
                 console.error(error);
                 this.error = error

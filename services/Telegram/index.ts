@@ -3,14 +3,15 @@ import {startNode} from "../../api";
 import { fromUnixTime, format, millisecondsToHours  } from 'date-fns'
 import {config} from "dotenv";
 import Scheduler from "../Schedule";
+import {NodeStatuses} from "../../constansts";
 
 config()
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN || 'YOUR TG BOT ID')
 let prevStatus: keyof typeof NodeStatuses | 'offline' | null = null
-let interval: any = null
+let interval: NodeJS.Timer | null= null
 
-const notify = async (ctx: any, state: typeof prevStatus, error: any) => {
+const notify = async (ctx: any, state: typeof prevStatus, error: Error | null) => {
         if (state !== 'offline' && state !== prevStatus) {
             ctx.reply(`Статус: ${state}${state === 'stopped' ? '. Пытаюсь перезапустить...' : ''}`)
             prevStatus = state
@@ -57,7 +58,7 @@ export const startBot = () => {
                     `Time since last active: - ${lastActive ? format(fromUnixTime(Number(lastNodeActive)), 'dd.MM.yyyy: HH:mm') : ''} \n` +
                     `SHM staked: ${lockedStake} SHM \n` +
                     `Earnings: ${currentRewards} SHM \n \n` +
-                    'Вступайте в нашу группу Shardeum - https://t.me/shardeum_rus'
+                    'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'
                 )
             } else {
                 ctx.reply('Запрашиваем информацию, попробуйте снова через пару минут')
