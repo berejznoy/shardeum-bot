@@ -1,5 +1,6 @@
 import NodeCache from 'node-cache';
 import {getNodeInfo, ResponseNodeInfo} from "../../api";
+import {AxiosError} from "axios";
 
 class Scheduler {
     private cache: NodeCache;
@@ -31,8 +32,12 @@ class Scheduler {
             }
             this.cache.set('cachedData', responseData);
         } catch (error) {
-            console.error(error);
-            this.error = error
+            if (error instanceof AxiosError && error.code === 'ETIMEDOUT') {
+                console.log('Request timed out, ignoring error.');
+            } else {
+                console.error(error);
+                this.error = error
+            }
         }
     }
     public get cacheData(): ResponseNodeInfo['data'] | undefined {

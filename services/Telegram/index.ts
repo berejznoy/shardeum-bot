@@ -31,7 +31,7 @@ export const startBot = () => {
 
     bot.start(ctx => {
         ctx.replyWithHTML(
-            'Приветсвую в <b>Shardeum Status</b>\n\n'+
+            'Приветствую в <b>Shardeum Status</b>\n\n'+
             '/status - Получение информации о ноде \n'+
             '/notify - Включить уведомления о статусе ноды \n' +
             '/info - повтор доступных команд')
