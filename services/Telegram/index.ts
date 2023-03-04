@@ -34,6 +34,7 @@ export const startBot = () => {
         ctx.replyWithHTML(
             'Приветствую в <b>Shardeum Status</b>\n\n'+
             '/status - Получение информации о ноде \n'+
+            '/performance - Получение информации о загрузке системы \n'+
             '/notify - Включить уведомления о статусе ноды \n' +
             '/info - повтор доступных команд')
     })
@@ -42,6 +43,7 @@ export const startBot = () => {
         ctx.replyWithHTML(
             'Доступные команды \n'+
             '/status - Получение информации о ноде \n'+
+            '/performance - Получение информации о загрузке системы \n'+
             '/notify - Включить уведомления о статусе ноды и перезапустить ноду если она остановлена')
     })
 
@@ -59,6 +61,19 @@ export const startBot = () => {
                     `SHM staked: ${lockedStake} SHM \n` +
                     `Earnings: ${currentRewards} SHM \n \n` +
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'
+                )
+            } else {
+                ctx.reply('Запрашиваем информацию, попробуйте снова через пару минут')
+            }
+    })
+
+    bot.command('performance', async ctx => {
+            if(scheduler.cacheData) {
+                const {performance} = scheduler.cacheData
+                await ctx.replyWithHTML(
+                    `CPU usage : ${performance?.cpuPercentage?.toFixed(2)} % \n`+
+                    `RAM usage : ${performance?.memPercentage?.toFixed(2)} % \n`+
+                    `Disk usage : ${performance?.diskPercentage?.toFixed(2)} % \n`
                 )
             } else {
                 ctx.reply('Запрашиваем информацию, попробуйте снова через пару минут')
