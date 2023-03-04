@@ -35,4 +35,4 @@ EOF
 `docker start shardeum-dashboard`, 
 ### а затем пункты 1, 2, 5
 
-Вступайте в мою группу https://t.me/shardeum_rus
+Вступайте в мою группу https://t.me/shardeumrus
