@@ -1,3 +1,6 @@
+
+Скрипты, бот и тех поддержка Shardeum в группе https://t.me/shardeumrus 
+
 # 1. Скрипт для перезапуска остановленной ноды без установки бота 
 
 1. `cd shardeum`
@@ -35,4 +38,4 @@ EOF
 `docker start shardeum-dashboard`, 
 ### а затем пункты 1, 2, 5
 
-Вступайте в мою группу https://t.me/shardeumrus
+Вступайте в группу https://t.me/shardeumrus 
