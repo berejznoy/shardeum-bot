@@ -1,4 +1,4 @@
-### 1. Install bot. 
+### 1. Install bot 
 
 1. Install git - `sudo apt install git`
 2. Check git version - `git --version`
@@ -32,7 +32,7 @@ EOF
    
 ### 4. Check bot
    `pm2 list` \
-\
+
    
 ## Update bot
 1. Go to bot folder
