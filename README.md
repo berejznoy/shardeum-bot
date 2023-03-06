@@ -31,7 +31,7 @@ EOF
    `pm2 start shardeum-bot`
    
 ### 4. Check bot
-   `pm2 list` \
+   `pm2 list` 
 
    
 ## Update bot
