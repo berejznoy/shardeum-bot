@@ -1,17 +1,17 @@
-### 1. Установка бота ТГ - Можно устанавливать где угодно, только не в самом контейнере. 
+### 1. Install bot. 
 
-1. Установить git - `sudo apt install git`
-2. Проверить что git установлен - `git --version`
-3. Установить nodejs (https://github.com/nodesource/distributions/blob/master/README.md) - не менее 18-й версии
-4. Проверить что нода установилась node - `node --version`
-5. Создать и перейти в папку где будет лежать бот `mkdir shardeum-bot` затем `cd shardeum-bot`
-6. Склонировать проект `git clone https://github.com/berejznoy/status-pushover.git` (Зарегистрироваться на https://github.com/, если нет аккаунта) 
-7. Перейти в папку с проектом `cd status-pushover` и установить пакеты `npm i`
-8. Заменить переменные\
-   `YOUR_IP` - адрес сервера с нодой\
-   `YOUR_PASSWORD` - пароль от Дашборда\
-   `YOUR_TG_BOT_TOKEN` - токен вышего бота (полученный от https://t.me/BotFather) \
-   в коде ниже и выполнить команду
+1. Install git - `sudo apt install git`
+2. Check git version - `git --version`
+3. Install Nodejs (https://github.com/nodesource/distributions/blob/master/README.md)
+4. Check NodeJs cersion - `node --version`
+5. Create folder for bot `mkdir shardeum-bot` and go to `cd shardeum-bot`
+6. Clone project `git clone https://github.com/berejznoy/status-pushover.git`
+7. Go to `cd status-pushover` and run `npm i`
+8. Change variables\
+   `YOUR_IP` - Shardeum Dashboard IP\
+   `YOUR_PASSWORD` - Paasword of Dashboard\
+   `YOUR_TG_BOT_TOKEN` - Telegram bot token (Go to https://t.me/BotFather for get it) \
+   and run below command
 ```
 sudo tee .env > /dev/null <<EOF
 PORT=3000
@@ -21,28 +21,28 @@ INTERVAL=60000
 TELEGRAM_BOT_TOKEN=YOUR_TG_BOT_TOKEN
 EOF
 ```
-9. Установить pm2 - `npm install pm2 -g`
-10. Запустить бота - `pm2 start npm --name "shardeum-bot" -- start`
+9. Install pm2 - `npm install pm2 -g`
+10. Run bot - `pm2 start npm --name "shardeum-bot" -- start`
 
-### 2. Остановить бота 
+### 2. Stop bot
    `pm2 stop shardeum-bot`
 
-### 3. Запустить бота 
+### 3. Restart bot 
    `pm2 start shardeum-bot`
    
-### 4. Проверить что бот работает
+### 4. Check bot
    `pm2 list` \
 \
-   В ответе статус у shardeum-bot будет active - работет и stopped - не работает
    
-## Обновление бота
-1. Перейти в папку где находится бот `cd /home/ВАШ_ПОЛЬЗОВАТЕЛЬ/shardeum-bot/status-pushover`
-2. Выполнить команду `pm2 delete shardeum-bot` - удаляем бота
-3. Выполнить команду `git pull` - стягиваем обновления
-4. Выполнить команду `npm i` - устанавливаем зависимости
-5. Выполнить команду `pm2 start npm --name "shardeum-bot" -- start` - запускаем бота
-6. Проверить что бот работает `pm2 list` - должен быть статус `online`
+## Update bot
+1. Go to bot folder
+2. Run `pm2 delete shardeum-bot` to delete bot
+3. Run `git pull` to download update
+4. Run `npm i` to install dependencies
+5. Run `pm2 start npm --name "shardeum-bot" -- start` - to start bot
+6. Run `pm2 list` to check bot
 
-## Если бот не отвечает можно посмотреть логи `pm2 log` 
+## To check the logs, run  `pm2 log` 
 
-Ошибка: Failed to get token: AxiosError: Request failed with status code 403 - Неправильно ввели пароль в .env
+Error: Failed to get token: AxiosError: Request failed with status code 403
+Solution: Rewrite your password in .env file
