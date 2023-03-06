@@ -1,3 +1,5 @@
+### Гайд на русском - https://teletype.in/@skaarj/P7aI0FoNjNh
+
 ### 1. Install bot 
 
 1. Install git - `sudo apt install git`
