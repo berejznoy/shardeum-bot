@@ -13,14 +13,14 @@ let interval: NodeJS.Timer | null= null
 
 const notify = async (ctx: any, state: typeof prevStatus, error: Error | null) => {
         if (state !== 'offline' && state !== prevStatus) {
-            ctx.reply(`Статус: ${state}${state === 'stopped' ? '. Пытаюсь перезапустить...' : ''}`)
+            ctx.reply(`Status: ${state}${state === 'stopped' ? '. Try to restart...' : ''}`)
             prevStatus = state
         }
         if(state === 'stopped') {
             await startNode()
         }
         if (error && prevStatus !== 'offline') {
-            ctx.reply('Статус: offline. Проверьте что контейнер запущен')
+            ctx.reply('Status: offline. Check your node')
             prevStatus = 'offline'
         }
 }
@@ -32,24 +32,24 @@ export const startBot = () => {
 
     bot.start(ctx => {
         ctx.replyWithHTML(
-            'Приветствую в <b>Shardeum Status</b>\n\n'+
-            '/status - Получение информации о ноде \n'+
-            '/performance - Получение информации о загрузке системы \n'+
-            '/notify - Включить уведомления о статусе ноды \n' +
-            '/info - повтор доступных команд')
+            'Welcome to <b>Shardeum Status Bot</b>\n\n'+
+            '/status - Get node status \n'+
+            '/performance - Get server load information \n'+
+            '/notify - Enable node status notifications and restart the node if it is stopped \n' +
+            '/info - Available commands')
     })
 
     bot.command('info', ctx => {
         ctx.replyWithHTML(
-            'Доступные команды \n'+
-            '/status - Получение информации о ноде \n'+
-            '/performance - Получение информации о загрузке системы \n'+
-            '/notify - Включить уведомления о статусе ноды и перезапустить ноду если она остановлена')
+            'Available commands \n'+
+            '/status - Get node status \n'+
+            '/performance - Get server load information \n'+
+            '/notify - Enable node status notifications and restart the node if it is stopped')
     })
 
     bot.command('status', async ctx => {
             if(scheduler.cacheError) {
-                ctx.reply('Статус: offline. Проверьте что контейнер запущен')
+                ctx.reply('Status: offline. Check your node')
                 return
             }
             if(scheduler.cacheData) {
@@ -63,7 +63,7 @@ export const startBot = () => {
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'
                 )
             } else {
-                ctx.reply('Запрашиваем информацию, попробуйте снова через пару минут')
+                ctx.reply('Wait one minute and try again.')
             }
     })
 
@@ -76,20 +76,20 @@ export const startBot = () => {
                     `Disk usage : ${performance?.diskPercentage?.toFixed(2)} % \n`
                 )
             } else {
-                ctx.reply('Запрашиваем информацию, попробуйте снова через пару минут')
+                ctx.reply('Wait one minute and try again.')
             }
     })
 
     bot.command('notify',   ctx => {
             if(interval) {
-                ctx.reply('Уведомления и перезапуск уже включены')
+                ctx.reply('Notifications and node restart already enabled')
                 return
             }
             interval = setInterval(() => notify(
                 ctx, scheduler?.cacheData?.state || 'offline',
                 scheduler?.cacheError
             ), Number(process.env.INTERVAL) || 5000 * 60)
-            ctx.reply('Уведомления и перезапуск включены')
+            ctx.reply('Notifications and node restart enabled')
         }
     )
 
