@@ -10,7 +10,7 @@ config()
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN || 'YOUR TG BOT ID')
 let prevStatus: keyof typeof NodeStatuses | 'offline' | null = null
 let interval: NodeJS.Timer | null= null
-const lang = process.env.LANG || 'ru'
+const lang = process.env.LANG || 'en'
 const notify = async (ctx: any, state: typeof prevStatus, error: Error | null) => {
         if (state && state !== 'offline' && state !== prevStatus) {
             // @ts-ignore
