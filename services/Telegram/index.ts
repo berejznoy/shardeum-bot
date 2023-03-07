@@ -3,24 +3,26 @@ import {startNode} from "../../api";
 import { fromUnixTime, format, millisecondsToHours  } from 'date-fns'
 import {config} from "dotenv";
 import Scheduler from "../Schedule";
-import {NodeStatuses} from "../../constansts";
+import {dictionaries, NodeStatuses} from "../../constansts";
 
 config()
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN || 'YOUR TG BOT ID')
 let prevStatus: keyof typeof NodeStatuses | 'offline' | null = null
 let interval: NodeJS.Timer | null= null
-
+const lang = process.env.lang  || 'en'
 const notify = async (ctx: any, state: typeof prevStatus, error: Error | null) => {
-        if (state !== 'offline' && state !== prevStatus) {
-            ctx.reply(`Status: ${state}${state === 'stopped' ? '. Try to restart...' : ''}`)
+        if (state && state !== 'offline' && state !== prevStatus) {
+            // @ts-ignore
+            ctx.reply(dictionaries.statuses[state][lang])
             prevStatus = state
         }
         if(state === 'stopped') {
             await startNode()
         }
         if (error && prevStatus !== 'offline') {
-            ctx.reply('Status: offline. Check your node')
+            // @ts-ignore
+            ctx.reply(dictionaries.statuses.offline[lang])
             prevStatus = 'offline'
         }
 }
@@ -31,25 +33,19 @@ export const startBot = () => {
     scheduler.start()
 
     bot.start(ctx => {
-        ctx.replyWithHTML(
-            'Welcome to <b>Shardeum Status Bot</b>\n\n'+
-            '/status - Get node status \n'+
-            '/performance - Get server load information \n'+
-            '/notify - Enable node status notifications and restart the node if it is stopped \n' +
-            '/info - Available commands')
+        // @ts-ignore
+        ctx.replyWithHTML(dictionaries.commands[lang])
     })
 
     bot.command('info', ctx => {
-        ctx.replyWithHTML(
-            'Available commands \n'+
-            '/status - Get node status \n'+
-            '/performance - Get server load information \n'+
-            '/notify - Enable node status notifications and restart the node if it is stopped')
+        // @ts-ignore
+        ctx.replyWithHTML(dictionaries.commands[lang])
     })
 
     bot.command('status', async ctx => {
             if(scheduler.cacheError) {
-                ctx.reply('Status: offline. Check your node')
+                // @ts-ignore
+                ctx.reply(dictionaries.statuses.offline[lang])
                 return
             }
             if(scheduler.cacheData) {
@@ -63,7 +59,8 @@ export const startBot = () => {
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'
                 )
             } else {
-                ctx.reply('Wait one minute and try again.')
+                // @ts-ignore
+                ctx.reply(dictionaries.waiting[lang])
             }
     })
 
@@ -76,20 +73,23 @@ export const startBot = () => {
                     `Disk usage : ${performance?.diskPercentage?.toFixed(2)} % \n`
                 )
             } else {
-                ctx.reply('Wait one minute and try again.')
+                // @ts-ignore
+                ctx.reply(dictionaries.waiting[lang])
             }
     })
 
     bot.command('notify',   ctx => {
             if(interval) {
-                ctx.reply('Notifications and node restart already enabled')
+                // @ts-ignore
+                ctx.reply(dictionaries.notify.exist[lang])
                 return
             }
             interval = setInterval(() => notify(
                 ctx, scheduler?.cacheData?.state || 'offline',
                 scheduler?.cacheError
             ), Number(process.env.INTERVAL) || 5000 * 60)
-            ctx.reply('Notifications and node restart enabled')
+            // @ts-ignore
+        ctx.reply(dictionaries.notify.new[lang])
         }
     )
 
