@@ -10,11 +10,11 @@ export const dictionaries = {
         en: 'Wait one minute and try again'
     },
     commands: {
-        ru: 'Доступные команды \n'+
+        ru: 'Доступные команды: \n'+
             '/status - Получить статус \n'+
             '/performance - Получить информацию о загрузке системы \n'+
             '/notify - Включить уведомления и автозапуск ноды',
-        en: 'Available commands \n'+
+        en: 'Available commands: \n'+
             '/status - Get node status \n'+
             '/performance - Get server load information \n'+
             '/notify - Enable node status notifications and restart the node if it is stopped'
@@ -33,10 +33,8 @@ export const dictionaries = {
             en: 'Node stopped. Try to restart...'
         },
         standby: {
-            stopped: {
                 ru: 'Нода в режиме ожидания',
                 en: 'Node is standby'
-            }
         }
     },
     notify: {
