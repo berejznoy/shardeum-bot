@@ -3,7 +3,7 @@
 
 # 1. Скрипт для перезапуска остановленной ноды без установки бота 
 
-1. ввести в консоль `docker exec -it shardeum-dashboard /bin/bash`
+1. выполнить в консоли `docker exec -it shardeum-dashboard /bin/bash`
 2. ввести в консоль 
 ```
 sudo tee restart.sh > /dev/null <<EOF
