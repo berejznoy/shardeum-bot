@@ -1,6 +1,5 @@
 import {Telegraf} from 'telegraf'
 import {startNode} from "../../api";
-import { fromUnixTime, format, millisecondsToHours  } from 'date-fns'
 import {config} from "dotenv";
 import Scheduler from "../Schedule";
 import {NodeStatuses} from "../../constansts";
@@ -54,10 +53,9 @@ export const startBot = () => {
             }
             if(scheduler.cacheData) {
                 const {state, totalTimeValidating, lastActive, lockedStake, currentRewards} = scheduler.cacheData
-                const lastNodeActive = String(lastActive).replace(/0*$/,"")
                 await ctx.replyWithHTML(`Status: ${state}\n`+
-                    `Total time validating: ${totalTimeValidating ? millisecondsToHours(totalTimeValidating) : ''}h \n`+
-                    `Time since last active: - ${lastActive ? format(fromUnixTime(Number(lastNodeActive)), 'dd.MM.yyyy: HH:mm') : ''} \n` +
+                    `Total time validating: ${totalTimeValidating} \n`+
+                    `Time since last active: - ${lastActive} \n` +
                     `SHM staked: ${lockedStake} SHM \n` +
                     `Earnings: ${currentRewards} SHM \n \n` +
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'
