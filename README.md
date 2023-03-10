@@ -24,7 +24,7 @@ TELEGRAM_BOT_TOKEN=YOUR_TG_BOT_TOKEN
 EOF
 ```
 9. Install pm2 - `npm install pm2 -g`
-10. Run bot - `npm run buld` then `pm2 start dist/index.js -n shardeum-bot`
+10. Run bot - `npm run build` then `pm2 start dist/index.js -n shardeum-bot`
 
 ### 2. Stop bot
    `pm2 stop shardeum-bot`
@@ -41,7 +41,7 @@ EOF
 2. Run `pm2 delete shardeum-bot` to delete bot
 3. Run `git pull` to download update
 4. Run `npm i` to install dependencies
-5. Run `npm run buld` then `pm2 start dist/index.js -n shardeum-bot` - to start bot
+5. Run `npm run build` then `pm2 start dist/index.js -n shardeum-bot` - to start bot
 6. Run `pm2 list` to check bot
 
 ## To check the logs, run  `pm2 log` 
