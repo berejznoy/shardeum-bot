@@ -3,37 +3,6 @@
 
 # 1. Скрипт для перезапуска остановленной ноды без установки бота 
 
-1. выполнить в консоли `docker exec -it shardeum-dashboard /bin/bash`
-2. ввести в консоль 
-```
-sudo tee restart.sh > /dev/null <<EOF
-#!/bin/sh
-
-check_status() {
- while :
- do 
-     if operator-cli status | grep "stopped"; then
-         echo "---Trying to restart---"
-         operator-cli start
-     elif operator-cli status | grep "standby"; then
-         echo "Waiting for active status"
-     fi
- sleep 30
- done
-}
-
-main() {
-  echo "start main"
-  check_status
-}
-main
-EOF
-```
-3. `sudo chmod +x restart.sh`
-4. `./restart.sh &`
-5. Закрыть консоль, остановить ноду и проверить что через 30 сек она снова запустилась
-
-### Если по какой-то причине остановится сам контейнер, то чтобы запустить скрипт заново, нужно сделать 
-`docker start shardeum-dashboard`, 
-### а затем пункты 1, 2, 5
-
+1. Установить screen: `sudo apt install screen`
+2. Выполнить в консоли `screen -S monitor`
+3. Выолнить в открывшейся консоли `wget -q -O node_control.sh https://raw.githubusercontent.com/mesahin001/shardeum/main/node_control.sh && chmod +x node_control.sh && sudo /bin/bash node_control.sh`
