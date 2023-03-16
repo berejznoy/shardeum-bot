@@ -1,5 +1,6 @@
 
 Скрипты, бот и тех поддержка Shardeum в группе https://t.me/shardeumrus 
+Авторы используемого скрипта - https://github.com/herculessx/Shardeum-BetaNet#-otomatik-ba%C5%9Flatma--takip-ekran%C4%B1-
 
 ## 1. Скрипт для перезапуска остановленной ноды без установки бота 
 
