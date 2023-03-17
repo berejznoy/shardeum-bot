@@ -1,6 +1,7 @@
 FROM node:latest
 RUN mkdir -p /app
 WORKDIR /app
+COPY package.json package-lock.json .npmrc ./
 RUN adduser --system --group app
 RUN npm install
 RUN npm install --save pm2
