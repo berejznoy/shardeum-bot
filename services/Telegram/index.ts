@@ -1,7 +1,7 @@
 import {Telegraf} from 'telegraf'
 import {config} from "dotenv";
 import Scheduler from "../Schedule";
-import {addSeconds, format, isDate} from 'date-fns'
+import {addSeconds, format, isValid} from 'date-fns'
 import {watch, cacheWrapper} from './helpers'
 import axios from "axios";
 
@@ -45,8 +45,8 @@ export const startBot = () => {
             if (scheduler.cacheData) {
                 const {state, totalTimeValidating, lastActive, lockedStake, currentRewards} = scheduler.cacheData
                 await ctx.replyWithHTML(`Status: <b>${state}</b>\n` +
-                    `Total time validating: ${totalTimeValidating} \n` +
-                    `Time since last active: ${isDate(new Date(lastActive)) ? new Date(lastActive).toLocaleDateString() : ''} \n` +
+                    `Total time validating: ${totalTimeValidating ? totalTimeValidating : ''} \n` +
+                    `Time since last active: ${isValid(new Date(lastActive)) ? new Date(lastActive).toLocaleDateString() : ''} \n` +
                     `SHM staked: ${lockedStake ? Number(lockedStake).toFixed(2) : 0} SHM \n` +
                     `Earnings: ${currentRewards ? Number(currentRewards).toFixed(2) : 0} SHM \n \n` +
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'

@@ -5,7 +5,7 @@ export type ResponseNodeInfo = {
     data: {
         state: 'active' | 'stopped' | 'standby' ,
         totalTimeRunning: number,
-        totalTimeValidating: number,
+        totalTimeValidating: string | boolean,
         lastActive: number,
         lastRotationIndex: string,
         stakeRequirement: string,
