@@ -12,8 +12,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
+      - .:/home/shardeum-bot/app
+      - node_modules:/home/shardeum-bot/app/node_modules
     networks:
       - app-network
     command: pm2 start npm --name "shardeum-bot" -- start
