@@ -13,6 +13,4 @@ services:
       - "3000:3000"
     volumes:
       - .:/home/shardeum-bot/app
-    networks:
-      - app-network
     command: pm2 start npm --name "shardeum-bot" -- start
