@@ -1,7 +1,7 @@
 FROM node:latest
 RUN mkdir -p /app
 WORKDIR /app
-COPY package.json ./
+COPY package.json .env ./
 RUN adduser --system --group app
 RUN npm install
 RUN npm install --save pm2
