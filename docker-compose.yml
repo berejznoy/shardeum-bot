@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./app:/home/bot
     restart: 'always'
     env_file: .env
     ports:
