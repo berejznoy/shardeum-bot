@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./home/bot:/app
+      - ./app:/home/bot
     restart: 'always'
     env_file: .env
     ports:
