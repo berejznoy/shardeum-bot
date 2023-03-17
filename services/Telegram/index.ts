@@ -25,7 +25,7 @@ export const startBot = () => {
             '/uptime - Get node uptime \n' +
             '/balance - Get wallet balance \n' +
             '/watch - Enable node watching \n' +
-            '/getTokens - Request tokens from a faucet \n' +
+            '/get-tokens - Request tokens from a faucet \n' +
             '/info - Available commands')
     })
     // Notification command group
@@ -37,7 +37,7 @@ export const startBot = () => {
             '/uptime - Get node uptime \n' +
             '/balance - Get wallet balance \n' +
             '/watch - Enable node watching \n' +
-            '/getTokens - Request tokens from a faucet' )
+            '/get-tokens - Request tokens from a faucet' )
     })
 
     bot.command('status', async ctx => {
@@ -107,7 +107,7 @@ export const startBot = () => {
         }
     )
 
-    bot.command('getTokens', async ctx => {
+    bot.command('get-tokens', async ctx => {
             try {
                 ctx.reply('Sending a request. Please wait...')
                 const response: {data: {success: boolean, message: string}} = await axios.post(`${FAUCET_URL}/sendSHM`, null, {
