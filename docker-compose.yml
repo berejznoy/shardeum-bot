@@ -1,16 +1,15 @@
-version: '3'
+version: "3"
 
 services:
-  nodejs:
+  shardeum-bot:
+    container_name: shardeum-bot
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs:latest
-    container_name: shardeum-bot
-    restart: unless-stopped
+    volumes:
+      - ./home/bot:/app
+    restart: 'always'
     env_file: .env
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/home/shardeum-bot/app
-    command: pm2 start npm --name "shardeum-bot" -- start
+      - '3000:3000'
+
