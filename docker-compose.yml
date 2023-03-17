@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs
+    image: nodejs:latest
     container_name: shardeum-bot
     restart: unless-stopped
     env_file: .env
