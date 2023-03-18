@@ -43,12 +43,14 @@ export const startBot = () => {
     bot.command('status', async ctx => {
         cacheWrapper(scheduler.cacheData, ctx, async () => {
             if (scheduler.cacheData) {
-                const {state, totalTimeValidating, lastActive, lockedStake, currentRewards} = scheduler.cacheData
+                console.log(scheduler.cacheData)
+                const {state, totalTimeValidating, lastActive, lockedStake, currentRewards, isAddressAlreadyUse  } = scheduler.cacheData
                 await ctx.replyWithHTML(`Status: <b>${state}</b>\n` +
-                    `Total time validating: ${totalTimeValidating ? totalTimeValidating : ''} \n` +
+                    `Total time validating: ${totalTimeValidating} \n` +
                     `Time since last active: ${isValid(new Date(lastActive)) ? new Date(lastActive).toLocaleDateString() : ''} \n` +
                     `SHM staked: ${lockedStake ? Number(lockedStake).toFixed(2) : 0} SHM \n` +
                     `Earnings: ${currentRewards ? Number(currentRewards).toFixed(2) : 0} SHM \n \n` +
+                    `<b>${isAddressAlreadyUse ? 'Warning!!! This wallet already has an active stake on a different node. Remove your stake first if you wish to stake for the current node.' : ''}</b> \n \n` +
                     'Вступайте в нашу группу Shardeum - https://t.me/shardeumrus'
                 )
             }

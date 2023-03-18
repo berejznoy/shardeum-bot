@@ -31,6 +31,7 @@ export type ResponseNodeInfo = {
             internalPort: number,
             status: null | string
         }
+        isAddressAlreadyUse?: boolean
     }
 
 }
@@ -41,6 +42,10 @@ const axiosWithAuth = new AxiosWithAuth();
 
 export const getNodeInfo = async(): Promise<ResponseNodeInfo["data"]> => {
     const response = await axiosWithAuth.get('/api/node/status')
+    return response?.data
+}
+export const getStakeInfo = async(): Promise<{nominee: string, stake: string}> => {
+    const response = await axiosWithAuth.get(`/api/account/${process.env.WALLET_ADDRESS}/stakeInfo`)
     return response?.data
 }
 
