@@ -1,5 +1,5 @@
 import NodeCache from 'node-cache';
-import {getNodeInfo, ResponseNodeInfo} from "../../api";
+import {getNodeInfo, getStakeInfo, ResponseNodeInfo} from "../../api";
 import {AxiosError} from "axios";
 
 class Scheduler {
@@ -24,13 +24,18 @@ class Scheduler {
         try {
 
             const responseData = await getNodeInfo()
+            let stakeData = {nominee: process.env.WALLET_ADDRESS}
+            if(process.env.WALLET_ADDRESS) {
+                stakeData = await getStakeInfo()
+            }
+            const isAddressAlreadyUse = responseData?.nominatorAddress?.toLowerCase() !== stakeData.nominee?.toLowerCase()
             this.error = null
             const cachedData = this.cache.get('cachedData');
 
             if (cachedData) {
                 this.cache.del('cachedData')
             }
-            this.cache.set('cachedData', responseData);
+            this.cache.set('cachedData', {...responseData, isAddressAlreadyUse});
         } catch (error) {
             if ((error instanceof AxiosError && error.code === 'ETIMEDOUT') || error?.response?.status === 400) {
                 console.log('Request timed out or HTTP 400 error, ignoring');
@@ -40,7 +45,7 @@ class Scheduler {
             }
         }
     }
-    public get cacheData(): ResponseNodeInfo['data'] | undefined {
+    public get cacheData(): (ResponseNodeInfo['data']) | undefined {
         return this.cache.get('cachedData')
     }
     public get cacheError() {
