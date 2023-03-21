@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "routes": [
+  "builds": [
     {
-      "src": "/.*",
-      "dest": "index.ts"
+      "src": "index.ts",
+      "use": "@now/node"
     }
   ]
 }
