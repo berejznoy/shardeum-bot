@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "builds": [
+  "routes": [
     {
-      "src": "index.ts",
-      "use": "@vercel/node"
+      "src": "/.*",
+      "dest": "index.ts"
     }
   ]
 }
