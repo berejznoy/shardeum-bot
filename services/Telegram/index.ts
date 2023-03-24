@@ -14,7 +14,7 @@ const FAUCET_URL = 'https://shardeum-faucet.vercel.app/'
 export const startBot = () => {
 
     //Запускаем шедулер и сохраняем ответ в кеш
-    const scheduler = new Scheduler(5, 5)
+    const scheduler = new Scheduler(30, 30)
     scheduler.start()
 
     bot.start(ctx => {
