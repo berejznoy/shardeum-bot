@@ -28,7 +28,8 @@ class Scheduler {
             if(process.env.WALLET_ADDRESS) {
                 stakeData = await getStakeInfo()
             }
-            const isAddressAlreadyUse = responseData?.nominatorAddress?.toLowerCase() !== stakeData.nominee?.toLowerCase()
+
+            const isAddressAlreadyUse = responseData?.nomineeAddress?.toLowerCase() !== stakeData.nominee?.toLowerCase()
             this.error = null
             const cachedData = this.cache.get('cachedData');
 
