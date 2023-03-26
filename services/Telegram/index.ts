@@ -1,8 +1,8 @@
 import {Telegraf} from 'telegraf'
 import {config} from "dotenv";
 import Scheduler from "../Schedule";
-import {addSeconds, format, isValid} from 'date-fns'
-import {watch, cacheWrapper} from './helpers'
+import {isValid} from 'date-fns'
+import {watch, cacheWrapper, formatSeconds} from './helpers'
 import axios from "axios";
 
 config()
@@ -73,18 +73,23 @@ export const startBot = () => {
             cacheWrapper(scheduler.cacheData, ctx, async () => {
                 if (scheduler.cacheData) {
                     const {totalTimeRunning} = scheduler.cacheData
-                    const helperDate = addSeconds(new Date(0), totalTimeRunning);
-                    ctx.reply(`Node total time running: ${format(helperDate, 'dd:mm:ss')}`)
+                    const helperDate = formatSeconds(totalTimeRunning);
+                    ctx.reply(`Node total time running: ${helperDate.days} day(s) ${helperDate.hours} hour(s) ${helperDate.minutes} minute(s) ${helperDate.seconds} second(s)`)
                 }
             }, scheduler.cacheError)
         }
     )
     bot.command('balance', async ctx => {
             try {
+                const wallet = process.env.WALLET_ADDRESS
+                if(!wallet){
+                    ctx.reply('This command is not available. Enter your wallet address in the .env file and restart the bot')
+                    return
+                }
                 ctx.reply('Sending a request. Please wait...')
                 const response = await axios.get(`${FAUCET_URL}/balance`, {
                     params: {
-                        address: process.env.WALLET_ADDRESS || ''
+                        address: wallet || ''
                     }
                 })
                 ctx.reply(`Balance: ${response?.data || 0} SHM`)
@@ -110,10 +115,15 @@ export const startBot = () => {
 
     bot.command('gettokens', async ctx => {
             try {
+                const wallet = process.env.WALLET_ADDRESS
+                if(!wallet){
+                    ctx.reply('This command is not available. Enter your wallet address in the .env file and restart the bot')
+                    return
+                }
                 ctx.reply('Sending a request. Please wait...')
                 const response: {data: {success: boolean, message: string}} = await axios.post(`${FAUCET_URL}/sendSHM`, null, {
                     params: {
-                        address: process.env.WALLET_ADDRESS || ''
+                        address: wallet || ''
                     }
                 })
                 if (response?.data?.success) {
