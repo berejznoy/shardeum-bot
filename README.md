@@ -41,8 +41,9 @@ EOF
 2. Run `pm2 delete shardeum-bot` to delete bot
 3. Run `git pull` to download update
 4. Run `npm i` to install dependencies
-5. Run `npm run build` then `pm2 start dist/index.js -n shardeum-bot` - to start bot
-6. Run `pm2 list` to check bot
+5. Run `npm run build` - make build
+6. Run `pm2 start dist/index.js -n shardeum-bot` - to start bot
+7. Run `pm2 list` - to check bot
 
 ## To check the logs, run  `pm2 log` 
 
