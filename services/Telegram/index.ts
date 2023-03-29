@@ -9,7 +9,7 @@ config()
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN || 'YOUR TG BOT ID')
 let interval: NodeJS.Timer | null = null
-const FAUCET_URL = 'https://shardeum-faucet.vercel.app/'
+const FAUCET_URL = 'https://get-shm.online'
 
 export const startBot = () => {
 
@@ -87,7 +87,7 @@ export const startBot = () => {
                     return
                 }
                 ctx.reply('Sending a request. Please wait...')
-                const response = await axios.get(`${FAUCET_URL}/balance`, {
+                const response = await axios.get(`${FAUCET_URL}/api/balance`, {
                     params: {
                         address: wallet || ''
                     }
@@ -121,7 +121,7 @@ export const startBot = () => {
                     return
                 }
                 ctx.reply('Sending a request. Please wait...')
-                const response: {data: {success: boolean, message: string}} = await axios.post(`${FAUCET_URL}/sendSHM`, null, {
+                const response: {data: {success: boolean, message: string}} = await axios.post(`${FAUCET_URL}/api/sendSHM`, null, {
                     params: {
                         address: wallet || ''
                     }
