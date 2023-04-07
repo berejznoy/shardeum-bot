@@ -8,7 +8,7 @@ export const watch = async (ctx: any, state: typeof prevStatus, error: Error | n
         ctx.reply(`Status: ${state}${state === 'stopped' ? '. Try to restart...' : ''}`)
         prevStatus = state
     }
-    if (state === 'stopped') {
+    if (!state || state === 'stopped') {
         await startNode()
     }
     if (error && prevStatus !== 'offline') {
