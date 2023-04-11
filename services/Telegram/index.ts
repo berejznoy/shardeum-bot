@@ -106,7 +106,7 @@ export const startBot = () => {
                 return
             }
             interval = setInterval(() => watch(
-                ctx, scheduler?.cacheData?.state || 'offline',
+                ctx, scheduler?.cacheData ? scheduler?.cacheData?.state : 'offline',
                 scheduler?.cacheError
             ), Number(process.env.INTERVAL) || 5000 * 60)
             ctx.reply('Node watching enabled')

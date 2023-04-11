@@ -1,6 +1,6 @@
 import {ResponseNodeInfo, startNode} from "../../api";
 import {NodeStatuses} from "../../constansts";
-import {format, intervalToDuration, Duration} from 'date-fns';
+import {intervalToDuration, Duration} from 'date-fns';
 let prevStatus: keyof typeof NodeStatuses | 'offline' | null = null
 
 export const watch = async (ctx: any, state: typeof prevStatus, error: Error | null) => {
