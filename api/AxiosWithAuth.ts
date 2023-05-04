@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import {config} from 'dotenv'
+import {hashSha256} from "../utils";
 
 config()
 
@@ -37,7 +38,8 @@ class AxiosWithAuth {
     public async getToken(): Promise<string | null> {
         if (!this.token) {
             try {
-                const response = await axios.post(this.tokenUrl, { password: this.password });
+                const sha256digest = await hashSha256(this.password)
+                const response = await axios.post(this.tokenUrl, { password: sha256digest });
                 this.token = response.data?.accessToken;
             } catch (error) {
                 console.error(`Failed to get token: ${error}`);
@@ -49,7 +51,8 @@ class AxiosWithAuth {
 
     public async refreshToken(): Promise<string | null> {
         try {
-            const response = await axios.post(this.tokenUrl, { password: this.password });
+            const sha256digest = await hashSha256(this.password)
+            const response = await axios.post(this.tokenUrl, { password: sha256digest });
             this.token = response.data.accessToken;
             return this.token;
         } catch (error) {
