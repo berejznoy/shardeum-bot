@@ -1,5 +1,6 @@
 export const NodeStatuses = {
     active: 'active',
     stopped: 'stopped',
-    standby: 'standby'
+    standby: 'standby',
+    'need-stake': 'need-stake'
 }

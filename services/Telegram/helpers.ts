@@ -4,6 +4,7 @@ import {intervalToDuration, Duration} from 'date-fns';
 let prevStatus: keyof typeof NodeStatuses | 'offline' | null = null
 
 export const watch = async (ctx: any, state: typeof prevStatus, error: Error | null) => {
+    if(state === 'need-stake') return
     if (state !== 'offline' && state !== prevStatus) {
         ctx.reply(`Status: ${state}${!state || (state === 'stopped') ? '. Try to restart...' : ''}`)
         prevStatus = state

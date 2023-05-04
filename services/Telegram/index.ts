@@ -113,6 +113,17 @@ export const startBot = () => {
         }
     )
 
+    bot.command('unwatch', ctx => {
+            if(interval) {
+                clearInterval(interval)
+                ctx.reply('Node watching disabled')
+                interval = null
+            } else {
+                ctx.reply('Node watching not running')
+            }
+        }
+    )
+
     bot.command('gettokens', async ctx => {
             try {
                 const wallet = process.env.WALLET_ADDRESS
